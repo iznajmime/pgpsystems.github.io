@@ -1,6 +1,28 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+const testimonials = [
+  {
+    quote: "PGP Systems automated our workflow and saved us 20 hours a week. Game-changing.",
+    name: "Jane Doe",
+    title: "CEO, TechCorp",
+    avatar: "https://i.pravatar.cc/150?img=1",
+  },
+  {
+    quote: "The custom AI chatbot they built for us increased our lead generation by 40%.",
+    name: "John Smith",
+    title: "Marketing Head, Innovate Ltd.",
+    avatar: "https://i.pravatar.cc/150?img=2",
+  },
+  {
+    quote: "Unbelievable efficiency gains. Their data analysis automation is a must-have.",
+    name: "Emily White",
+    title: "COO, DataDriven Inc.",
+    avatar: "https://i.pravatar.cc/150?img=3",
+  },
+];
 
 const caseStudies = [
   {
@@ -36,49 +58,82 @@ const caseStudies = [
 const Portfolio = () => {
   return (
     <div className="container px-4 md:px-6 py-12 md:py-24 lg:py-32">
-      <div className="text-center space-y-4 mb-12">
+      <div className="text-center space-y-4 mb-12 md:mb-24">
         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl fade-in-up">
-          Case Studies
+          Past Projects &amp; Testimonials
         </h1>
         <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 fade-in-up" style={{ animationDelay: '0.2s' }}>
-          See how our AI automation solutions deliver real, quantifiable results for our clients.
+          Discover how we've transformed businesses and hear what our clients have to say about their success.
         </p>
       </div>
-      <div className="grid gap-8">
-        {caseStudies.map((study, index) => (
-          <Card key={index} className="w-full overflow-hidden grid md:grid-cols-2 items-center fade-in-up" style={{ animationDelay: `${0.1 * (index + 1)}s` }}>
-            <img
-              src={study.image}
-              alt={`Case study for ${study.client}`}
-              className="w-full h-full object-cover aspect-video md:aspect-auto"
-            />
-            <div className="flex flex-col h-full">
-              <CardHeader>
-                <CardTitle className="text-2xl">{study.client}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4 flex-grow">
-                <div>
-                  <h3 className="font-semibold">The Problem</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{study.problem}</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold">Our Solution</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{study.solution}</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold">The Results</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{study.results}</p>
-                </div>
+
+      {/* Testimonials Section */}
+      <section className="w-full mb-16 md:mb-24">
+        <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl fade-in-up mb-12">
+          What Our Clients Say
+        </h2>
+        <div className="mx-auto grid max-w-5xl items-start gap-6 lg:grid-cols-3 lg:gap-12">
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="fade-in-up h-full flex flex-col" style={{ animationDelay: `${0.2 * (index + 1)}s` }}>
+              <CardContent className="p-6 flex-grow">
+                <blockquote className="text-lg font-medium">"{testimonial.quote}"</blockquote>
               </CardContent>
-              <CardFooter>
-                <Button asChild>
-                  <Link to="/#contact">Discuss Your Project</Link>
-                </Button>
-              </CardFooter>
-            </div>
-          </Card>
-        ))}
-      </div>
+              <div className="flex items-center gap-4 p-6 pt-4 mt-auto border-t border-gray-200 dark:border-gray-800">
+                <Avatar>
+                  <AvatarImage src={testimonial.avatar} />
+                  <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-semibold">{testimonial.name}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.title}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Case Studies Section */}
+      <section>
+        <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl fade-in-up mb-12">
+          In-Depth Case Studies
+        </h2>
+        <div className="grid gap-8">
+          {caseStudies.map((study, index) => (
+            <Card key={index} className="w-full overflow-hidden grid md:grid-cols-2 items-center fade-in-up" style={{ animationDelay: `${0.1 * (index + 1)}s` }}>
+              <img
+                src={study.image}
+                alt={`Case study for ${study.client}`}
+                className="w-full h-full object-cover aspect-video md:aspect-auto"
+              />
+              <div className="flex flex-col h-full">
+                <CardHeader>
+                  <CardTitle className="text-2xl">{study.client}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4 flex-grow">
+                  <div>
+                    <h3 className="font-semibold">The Problem</h3>
+                    <p className="text-gray-500 dark:text-gray-400">{study.problem}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Our Solution</h3>
+                    <p className="text-gray-500 dark:text-gray-400">{study.solution}</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">The Results</h3>
+                    <p className="text-gray-500 dark:text-gray-400">{study.results}</p>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button asChild>
+                    <Link to="/#contact">Discuss Your Project</Link>
+                  </Button>
+                </CardFooter>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const Header = () => {
           Home
         </NavLink>
         <NavLink to="/portfolio" className={navLinkClass}>
-          Case Studies
+          Past Projects
         </NavLink>
         <NavLink to="/services" className={navLinkClass}>
           Services
